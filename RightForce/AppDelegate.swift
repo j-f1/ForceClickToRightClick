@@ -8,11 +8,13 @@
 import Cocoa
 import SwiftUI
 
-struct State: Codable {
+struct State {
   var mouseDownTime: TimeInterval?
   var currentEvent: ClickEvent?
   var history: [ClickEvent] = []
   var isUp = false
+  var ignoring = false
+  var window: NSWindow
 
   struct ClickEvent: Codable {
     let event: Event
@@ -22,9 +24,9 @@ struct State: Codable {
       let pressure: Float
       let stage: Int
     }
-    enum Event: Int, Codable {
-      case primary
-      case secondary
+    enum Event: String, Codable {
+      case primary = "primary"
+      case secondary = "secondary"
     }
   }
 }
@@ -34,7 +36,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   var window: NSWindow!
 
-  var state = State()
+  var state: State!
 
   func applicationDidFinishLaunching(_ aNotification: Notification) {
     // Create the SwiftUI view that provides the window contents.
@@ -42,17 +44,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     // Create the window and set the content view.
     window = NSWindow(
-        contentRect: NSRect(x: 0, y: 0, width: 480, height: 300),
-        styleMask: [.titled, .closable, .miniaturizable, .resizable, .fullSizeContentView],
-        backing: .buffered, defer: false)
+      contentRect: NSRect(x: 0, y: 0, width: 480, height: 300),
+      styleMask: [.titled, .closable, .miniaturizable, .resizable, .fullSizeContentView],
+      backing: .buffered, defer: false)
     window.isReleasedWhenClosed = false
     window.center()
     window.setFrameAutosaveName("Main Window")
     window.contentView = NSHostingView(rootView: contentView)
     window.makeKeyAndOrderFront(nil)
+    state = State(window: window)
 
 
-    if let eventTap = CGEvent.tapCreate(
+    let eventTap = CGEvent.tapCreate(
       tap: .cgSessionEventTap,
       place: .headInsertEventTap,
       options: .listenOnly,
@@ -61,10 +64,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if let event = NSEvent(cgEvent: cgEvent),
            let state = state?.assumingMemoryBound(to: State.self) {
           if event.type == .leftMouseDown {
-            state.pointee.isUp = false
-            state.pointee.mouseDownTime = event.timestamp
-            state.pointee.currentEvent = .init(event: .primary)
-          } else if event.type == .pressure {
+            let win = state.pointee.window
+            let ignoring = !win.frame.contains(cgEvent.unflippedLocation)
+            state.pointee.ignoring = ignoring
+            if !ignoring {
+              let loc = win.convertPoint(fromScreen: cgEvent.location)
+              state.pointee.isUp = false
+              state.pointee.mouseDownTime = event.timestamp
+              state.pointee.currentEvent = .init(event: loc.x <= win.frame.width / 2 ? .primary : .secondary)
+            }
+          } else if event.type == .pressure && !state.pointee.ignoring {
             state.pointee.currentEvent!.pressures.append(
               State.ClickEvent.Pressure(
                 dt: state.pointee.mouseDownTime!.distance(to: event.timestamp),
@@ -82,7 +91,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
           }
         }
         return Unmanaged.passUnretained(cgEvent)
-      }, userInfo: &state) {
+      }, userInfo: &state)
+    if let eventTap = eventTap {
       RunLoop.current.add(eventTap, forMode: .common)
       CGEvent.tapEnable(tap: eventTap, enable: true)
     }
