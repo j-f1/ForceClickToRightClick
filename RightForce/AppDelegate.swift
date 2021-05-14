@@ -59,7 +59,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       tap: .cgSessionEventTap,
       place: .headInsertEventTap,
       options: .listenOnly,
-      eventsOfInterest: .all,
+      eventsOfInterest: [.leftMouseDown, .leftMouseUp, .pressure],
       callback: { proxy, type, cgEvent, state in
         if let event = NSEvent(cgEvent: cgEvent),
            let state = state?.assumingMemoryBound(to: State.self) {
@@ -74,7 +74,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
               state.pointee.currentEvent = .init(event: loc.x <= win.frame.width / 2 ? .primary : .secondary)
             }
           } else if event.type == .pressure && !state.pointee.ignoring {
-            state.pointee.currentEvent!.pressures.append(
+            state.pointee.currentEvent?.pressures.append(
               State.ClickEvent.Pressure(
                 dt: state.pointee.mouseDownTime!.distance(to: event.timestamp),
                 pressure: event.pressure,

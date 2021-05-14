@@ -8,6 +8,8 @@
 import Foundation
 
 extension CGEventType {
+  static var pressure = CGEventType(rawValue: 29)!
+
   fileprivate var mask: CGEventMask { 1 << rawValue }
 
   var description: String {
