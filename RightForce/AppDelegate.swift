@@ -10,6 +10,7 @@ import SwiftUI
 
 struct State {
   var mouseDownEvent: CGEvent
+  var task: DispatchWorkItem
   var isRight = false
   var mouseMoves: [CGPoint] = []
 }
@@ -17,7 +18,6 @@ struct State {
 extension UnsafeMutablePointer where Pointee == State? {
   var mouseDownEvent: CGEvent {
     get { pointee!.mouseDownEvent }
-    set { pointee = State(mouseDownEvent: newValue) }
   }
   var mouseMoves: [CGPoint] {
     get { pointee!.mouseMoves }
@@ -30,6 +30,7 @@ extension UnsafeMutablePointer where Pointee == State? {
 
   func replay(into proxy: CGEventTapProxy, from event: CGEvent) {
 //    print("replay")
+    pointee!.task.cancel()
     let source = CGEventSource(event: event)
     mouseDownEvent.copy()!.tapPostEvent(proxy)
     mouseMoves.forEach {
@@ -77,7 +78,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if let event = NSEvent(cgEvent: cgEvent),
            var state = state?.assumingMemoryBound(to: State?.self) {
           if event.type == .leftMouseDown {
-            state.pointee = State(mouseDownEvent: cgEvent)
+            state.pointee = State(
+              mouseDownEvent: cgEvent,
+              task: DispatchWorkItem {
+                print("abort")
+                state.replay(into: proxy, from: cgEvent)
+              }
+            )
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(200), execute: state.pointee!.task)
             return nil
           } else if state.pointee != nil {
             if event.type == .leftMouseUp {
@@ -113,6 +121,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
               if event.stage == 2 && !state.isRight {
 //                print("right down!")
                 state.isRight = true
+                state.pointee!.task.cancel()
                 let copy = cgEvent.copy()!
                 copy.type = .rightMouseDown
                 copy.setIntegerValueField(.mouseEventButtonNumber, value: Int64(CGMouseButton.right.rawValue))
