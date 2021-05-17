@@ -9,25 +9,38 @@ import Cocoa
 import SwiftUI
 
 struct State {
-  var mouseDownTime: TimeInterval?
-  var currentEvent: ClickEvent?
-  var history: [ClickEvent] = []
-  var isUp = false
-  var ignoring = false
-  var window: NSWindow
+  var mouseDownLoc: CGPoint
+  var isRight = false
+  var mouseMoves: [CGPoint] = []
+}
 
-  struct ClickEvent: Codable {
-    let event: Event
-    var pressures: [Pressure] = []
-    struct Pressure: Codable {
-      let dt: TimeInterval
-      let pressure: Float
-      let stage: Int
+extension UnsafeMutablePointer where Pointee == State? {
+  var mouseDownLoc: CGPoint {
+    get { pointee!.mouseDownLoc }
+    set { pointee = State(mouseDownLoc: newValue) }
+  }
+  var mouseMoves: [CGPoint] {
+    get { pointee!.mouseMoves }
+    set { pointee!.mouseMoves = newValue }
+  }
+  var isRight: Bool {
+    get { pointee?.isRight ?? false }
+    set { pointee!.isRight = newValue }
+  }
+
+  func replay(into proxy: CGEventTapProxy, from event: CGEvent) {
+    print("replay")
+    let source = CGEventSource(event: event)
+    CGEvent(mouseEventSource: source, mouseType: .leftMouseDown, mouseCursorPosition: mouseDownLoc, mouseButton: .left)?.tapPostEvent(proxy)
+    mouseMoves.forEach {
+      CGEvent(
+        mouseEventSource: source,
+        mouseType: .leftMouseDragged,
+        mouseCursorPosition: $0,
+        mouseButton: .left
+      )?.tapPostEvent(proxy)
     }
-    enum Event: String, Codable {
-      case primary = "primary"
-      case secondary = "secondary"
-    }
+    pointee = nil
   }
 }
 
@@ -36,7 +49,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   var window: NSWindow!
 
-  var state: State!
+  var state: State?
 
   func applicationDidFinishLaunching(_ aNotification: Notification) {
     // Create the SwiftUI view that provides the window contents.
@@ -52,45 +65,88 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     window.setFrameAutosaveName("Main Window")
     window.contentView = NSHostingView(rootView: contentView)
     window.makeKeyAndOrderFront(nil)
-    state = State(window: window)
 
 
     let eventTap = CGEvent.tapCreate(
       tap: .cgSessionEventTap,
       place: .headInsertEventTap,
-      options: .listenOnly,
-      eventsOfInterest: [.leftMouseDown, .leftMouseUp, .pressure],
+      options: .defaultTap,
+      eventsOfInterest: [.leftMouseDown, .leftMouseUp, .pressure, .leftMouseDragged],
       callback: { proxy, type, cgEvent, state in
+//        print(cgEvent)
         if let event = NSEvent(cgEvent: cgEvent),
-           let state = state?.assumingMemoryBound(to: State.self) {
+           var state = state?.assumingMemoryBound(to: State?.self) {
           if event.type == .leftMouseDown {
-            let win = state.pointee.window
-            let ignoring = !win.frame.contains(cgEvent.unflippedLocation)
-            state.pointee.ignoring = ignoring
-            if !ignoring {
-              let loc = win.convertPoint(fromScreen: cgEvent.location)
-              state.pointee.isUp = false
-              state.pointee.mouseDownTime = event.timestamp
-              state.pointee.currentEvent = .init(event: loc.x <= win.frame.width / 2 ? .primary : .secondary)
+
+            state.pointee = State(mouseDownLoc: cgEvent.location)
+            return nil
+          } else if state.pointee != nil {
+            if event.type == .leftMouseUp {
+//              print("replaying: mouse up")
+              if state.isRight {
+                return Unmanaged.passRetained(
+                  CGEvent(
+                    mouseEventSource: CGEventSource(event: cgEvent),
+                    mouseType: .rightMouseUp,
+                    mouseCursorPosition: cgEvent.location,
+                    mouseButton: .right
+                  )!
+                )
+              } else {
+                state.replay(into: proxy, from: cgEvent)
+                return Unmanaged.passUnretained(cgEvent)
+              }
+            } else if event.type == .leftMouseDragged {
+              let distanceSq = pow(cgEvent.location.x - state.mouseDownLoc.x, 2) + pow(cgEvent.location.y - state.mouseDownLoc.y, 2)
+              if state.isRight {
+                return Unmanaged.passRetained(
+                  CGEvent(
+                    mouseEventSource: CGEventSource(event: cgEvent),
+                    mouseType: .rightMouseDragged,
+                    mouseCursorPosition: cgEvent.location,
+                    mouseButton: .right
+                  )!
+                )
+              } else if distanceSq >= pow(8, 2) {
+//                print("replaying: out of bounds")
+                state.replay(into: proxy, from: cgEvent)
+                return Unmanaged.passUnretained(cgEvent)
+              } else {
+//                print("move: in bounds")
+                state.mouseMoves.append(cgEvent.location)
+                return Unmanaged.passRetained(
+                  CGEvent(
+                    mouseEventSource: CGEventSource(event: cgEvent),
+                    mouseType: .mouseMoved,
+                    mouseCursorPosition: cgEvent.location,
+                    mouseButton: .left
+                  )!
+                )
+              }
+            } else if event.type == .pressure {
+              if event.stage == 2 && !state.isRight {
+                print("right down!")
+                state.isRight = true
+                return Unmanaged.passRetained(
+                  CGEvent(
+                    mouseEventSource: CGEventSource(event: cgEvent),
+                    mouseType: .rightMouseDown,
+                    mouseCursorPosition: state.mouseDownLoc,
+                    mouseButton: .right
+                  )!
+                )
+              } else {
+                return nil
+              }
+            } else {
+              return Unmanaged.passUnretained(cgEvent)
             }
-          } else if event.type == .pressure && !state.pointee.ignoring {
-            state.pointee.currentEvent?.pressures.append(
-              State.ClickEvent.Pressure(
-                dt: state.pointee.mouseDownTime!.distance(to: event.timestamp),
-                pressure: event.pressure,
-                stage: event.stage
-              )
-            )
-            if state.pointee.isUp {
-              state.pointee.history.append(state.pointee.currentEvent!)
-              state.pointee.currentEvent = nil
-              state.pointee.mouseDownTime = nil
-            }
-          } else if event.type == .leftMouseUp {
-            state.pointee.isUp = true
+          } else {
+            return Unmanaged.passUnretained(cgEvent)
           }
+        } else {
+          fatalError("Unexpected failure to construct state or NSEvent")
         }
-        return Unmanaged.passUnretained(cgEvent)
       }, userInfo: &state)
     if let eventTap = eventTap {
       RunLoop.current.add(eventTap, forMode: .common)
@@ -100,8 +156,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   func applicationWillTerminate(_ aNotification: Notification) {
     // Insert code here to tear down your application
-    let result = try! JSONEncoder().encode(state.history)
-    try! result.write(to: URL(fileURLWithPath: "/Users/jed/Downloads/clicks.json"))
   }
 
 

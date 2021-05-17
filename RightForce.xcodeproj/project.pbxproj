@@ -25,6 +25,7 @@
 		856112E8264ACD0800FC95AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		856112E9264ACD0800FC95AD /* RightForce.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RightForce.entitlements; sourceTree = "<group>"; };
 		856112EF264ADC8B00FC95AD /* CGEventExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGEventExtension.swift; sourceTree = "<group>"; };
+		8565A45A264F059100E98569 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,6 +42,7 @@
 		856112D0264ACD0500FC95AD = {
 			isa = PBXGroup;
 			children = (
+				8565A45A264F059100E98569 /* README.md */,
 				856112DB264ACD0600FC95AD /* RightForce */,
 				856112DA264ACD0600FC95AD /* Products */,
 			);
