@@ -9,15 +9,15 @@ import Cocoa
 import SwiftUI
 
 struct State {
-  var mouseDownLoc: CGPoint
+  var mouseDownEvent: CGEvent
   var isRight = false
   var mouseMoves: [CGPoint] = []
 }
 
 extension UnsafeMutablePointer where Pointee == State? {
-  var mouseDownLoc: CGPoint {
-    get { pointee!.mouseDownLoc }
-    set { pointee = State(mouseDownLoc: newValue) }
+  var mouseDownEvent: CGEvent {
+    get { pointee!.mouseDownEvent }
+    set { pointee = State(mouseDownEvent: newValue) }
   }
   var mouseMoves: [CGPoint] {
     get { pointee!.mouseMoves }
@@ -29,9 +29,9 @@ extension UnsafeMutablePointer where Pointee == State? {
   }
 
   func replay(into proxy: CGEventTapProxy, from event: CGEvent) {
-    print("replay")
+//    print("replay")
     let source = CGEventSource(event: event)
-    CGEvent(mouseEventSource: source, mouseType: .leftMouseDown, mouseCursorPosition: mouseDownLoc, mouseButton: .left)?.tapPostEvent(proxy)
+    mouseDownEvent.copy()!.tapPostEvent(proxy)
     mouseMoves.forEach {
       CGEvent(
         mouseEventSource: source,
@@ -77,36 +77,27 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if let event = NSEvent(cgEvent: cgEvent),
            var state = state?.assumingMemoryBound(to: State?.self) {
           if event.type == .leftMouseDown {
-
-            state.pointee = State(mouseDownLoc: cgEvent.location)
+            state.pointee = State(mouseDownEvent: cgEvent)
             return nil
           } else if state.pointee != nil {
             if event.type == .leftMouseUp {
 //              print("replaying: mouse up")
               if state.isRight {
-                return Unmanaged.passRetained(
-                  CGEvent(
-                    mouseEventSource: CGEventSource(event: cgEvent),
-                    mouseType: .rightMouseUp,
-                    mouseCursorPosition: cgEvent.location,
-                    mouseButton: .right
-                  )!
-                )
+                let copy = cgEvent.copy()!
+                copy.type = .rightMouseUp
+                copy.setIntegerValueField(.mouseEventButtonNumber, value: Int64(CGMouseButton.right.rawValue))
+                return Unmanaged.passRetained(copy)
               } else {
                 state.replay(into: proxy, from: cgEvent)
                 return Unmanaged.passUnretained(cgEvent)
               }
             } else if event.type == .leftMouseDragged {
-              let distanceSq = pow(cgEvent.location.x - state.mouseDownLoc.x, 2) + pow(cgEvent.location.y - state.mouseDownLoc.y, 2)
+              let distanceSq = pow(cgEvent.location.x - state.mouseDownEvent.location.x, 2) + pow(cgEvent.location.y - state.mouseDownEvent.location.y, 2)
               if state.isRight {
-                return Unmanaged.passRetained(
-                  CGEvent(
-                    mouseEventSource: CGEventSource(event: cgEvent),
-                    mouseType: .rightMouseDragged,
-                    mouseCursorPosition: cgEvent.location,
-                    mouseButton: .right
-                  )!
-                )
+                let copy = cgEvent.copy()!
+                copy.type = .rightMouseDragged
+                copy.setIntegerValueField(.mouseEventButtonNumber, value: Int64(CGMouseButton.right.rawValue))
+                return Unmanaged.passRetained(copy)
               } else if distanceSq >= pow(8, 2) {
 //                print("replaying: out of bounds")
                 state.replay(into: proxy, from: cgEvent)
@@ -114,27 +105,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
               } else {
 //                print("move: in bounds")
                 state.mouseMoves.append(cgEvent.location)
-                return Unmanaged.passRetained(
-                  CGEvent(
-                    mouseEventSource: CGEventSource(event: cgEvent),
-                    mouseType: .mouseMoved,
-                    mouseCursorPosition: cgEvent.location,
-                    mouseButton: .left
-                  )!
-                )
+                let copy = cgEvent.copy()!
+                copy.type = .mouseMoved
+                return Unmanaged.passRetained(copy)
               }
             } else if event.type == .pressure {
               if event.stage == 2 && !state.isRight {
-                print("right down!")
+//                print("right down!")
                 state.isRight = true
-                return Unmanaged.passRetained(
-                  CGEvent(
-                    mouseEventSource: CGEventSource(event: cgEvent),
-                    mouseType: .rightMouseDown,
-                    mouseCursorPosition: state.mouseDownLoc,
-                    mouseButton: .right
-                  )!
-                )
+                let copy = cgEvent.copy()!
+                copy.type = .rightMouseDown
+                copy.setIntegerValueField(.mouseEventButtonNumber, value: Int64(CGMouseButton.right.rawValue))
+                return Unmanaged.passRetained(copy)
               } else {
                 return nil
               }
