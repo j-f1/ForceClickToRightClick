@@ -20,7 +20,7 @@ class Wrapper {
     var mouseMoves: [CGPoint] = []
 
     func replay(into proxy: CGEventTapProxy, from event: CGEvent) {
-  //    print("replay")
+//      print("replay")
       task.cancel()
       let source = CGEventSource(event: event)
       mouseDownEvent.copy()!.tapPostEvent(proxy)
@@ -36,7 +36,7 @@ class Wrapper {
   }
 }
 
-func handle(event: NSEvent, cgEvent: CGEvent, wrapper: Wrapper, proxy: CGEventTapProxy) -> Unmanaged<CGEvent>? {
+func handle(event: NSEvent, cgEvent: CGEvent, wrapper: Wrapper, proxy: CGEventTapProxy) -> CGEvent? {
   if event.type == .leftMouseDown {
     let state = Wrapper.State(mouseDownEvent: cgEvent)
     state.task = DispatchWorkItem {
@@ -54,10 +54,10 @@ func handle(event: NSEvent, cgEvent: CGEvent, wrapper: Wrapper, proxy: CGEventTa
         let copy = cgEvent.copy()!
         copy.type = .rightMouseUp
         copy.setIntegerValueField(.mouseEventButtonNumber, value: Int64(CGMouseButton.right.rawValue))
-        return Unmanaged.passRetained(copy)
+        return copy
       } else {
         state.replay(into: proxy, from: cgEvent)
-        return Unmanaged.passUnretained(cgEvent)
+        return cgEvent
       }
     } else if event.type == .leftMouseDragged {
       let distanceSq = pow(cgEvent.location.x - state.mouseDownEvent.location.x, 2) + pow(cgEvent.location.y - state.mouseDownEvent.location.y, 2)
@@ -65,17 +65,17 @@ func handle(event: NSEvent, cgEvent: CGEvent, wrapper: Wrapper, proxy: CGEventTa
         let copy = cgEvent.copy()!
         copy.type = .rightMouseDragged
         copy.setIntegerValueField(.mouseEventButtonNumber, value: Int64(CGMouseButton.right.rawValue))
-        return Unmanaged.passRetained(copy)
+        return copy
       } else if distanceSq >= pow(8, 2) {
 //        print("replaying: out of bounds")
         state.replay(into: proxy, from: cgEvent)
-        return Unmanaged.passUnretained(cgEvent)
+        return cgEvent
       } else {
 //        print("move: in bounds")
         state.mouseMoves.append(cgEvent.location)
         let copy = cgEvent.copy()!
         copy.type = .mouseMoved
-        return Unmanaged.passRetained(copy)
+        return copy
       }
     } else if event.type == .pressure {
       if event.stage == 2 && !state.isRight {
@@ -85,14 +85,14 @@ func handle(event: NSEvent, cgEvent: CGEvent, wrapper: Wrapper, proxy: CGEventTa
         let copy = cgEvent.copy()!
         copy.type = .rightMouseDown
         copy.setIntegerValueField(.mouseEventButtonNumber, value: Int64(CGMouseButton.right.rawValue))
-        return Unmanaged.passRetained(copy)
+        return copy
       } else {
         return nil
       }
     } else {
-      return Unmanaged.passUnretained(cgEvent)
+      return cgEvent
     }
   } else {
-    return Unmanaged.passUnretained(cgEvent)
+    return cgEvent
   }
 }

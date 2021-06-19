@@ -58,7 +58,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 //        print(cgEvent)
         if let event = NSEvent(cgEvent: cgEvent),
            let wrapper = ctx?.load(as: Wrapper.self) {
-          return handle(event: event, cgEvent: cgEvent, wrapper: wrapper, proxy: proxy)
+          if let newEvent = handle(event: event, cgEvent: cgEvent, wrapper: wrapper, proxy: proxy) {
+            if newEvent == cgEvent {
+              return .passUnretained(cgEvent)
+            } else {
+              return .passRetained(newEvent)
+            }
+          } else {
+            return nil
+          }
         } else {
           fatalError("Unexpected failure to construct state or NSEvent")
         }
