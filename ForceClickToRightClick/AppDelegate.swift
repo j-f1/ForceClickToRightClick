@@ -6,12 +6,49 @@
 //
 
 import Cocoa
+import MenuBuilder
+import LaunchAtLogin
 
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
   var state = Wrapper()
 
+  let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
+
   func applicationDidFinishLaunching(_: Notification) {
+    createEventTap()
+    initStatusItem()
+  }
+
+  func initStatusItem() {
+    statusItem.menu = NSMenu(buildMenu)
+    statusItem.button?.title = "*** "
+  }
+
+  @MenuBuilder func buildMenu() -> [NSMenuItem] {
+    let appName = Bundle.main.infoDictionary![kCFBundleNameKey as String]!
+    MenuItem("About \(appName)")
+      .onSelect {
+        NSWorkspace.shared.open(URL(string: "https://github.com/j-f1/ForceClickToRightClick")!)
+      }
+    MenuItem("Send Feedback…")
+      .onSelect {
+        NSWorkspace.shared.open(URL(string: "https://j-f1.github.io/ForceClickToRightClick/contact.html")!)
+      }
+    SeparatorItem()
+    MenuItem("Launch At Login")
+      .state(LaunchAtLogin.isEnabled ? .on : .off)
+      .onSelect {
+        LaunchAtLogin.isEnabled.toggle()
+        self.statusItem.menu?.replaceItems(with: self.buildMenu)
+      }
+    SeparatorItem()
+    MenuItem("Quit \(appName)")
+      .shortcut("q")
+      .onSelect { NSApp.terminate(nil) }
+  }
+
+  func createEventTap() {
     let eventTap = CGEvent.tapCreate(
       tap: .cgSessionEventTap,
       place: .headInsertEventTap,

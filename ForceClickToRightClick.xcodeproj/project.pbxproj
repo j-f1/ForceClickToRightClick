@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -13,6 +13,8 @@
 		856112E7264ACD0800FC95AD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 856112E5264ACD0800FC95AD /* Main.storyboard */; };
 		856112F0264ADC8B00FC95AD /* CGEventExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 856112EF264ADC8B00FC95AD /* CGEventExtension.swift */; };
 		85C8AB46267E22EC00B67E09 /* EventHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C8AB45267E22EC00B67E09 /* EventHandler.swift */; };
+		85C8AB49267E27BE00B67E09 /* MenuBuilder in Frameworks */ = {isa = PBXBuildFile; productRef = 85C8AB48267E27BE00B67E09 /* MenuBuilder */; };
+		85C8AB4C267E28FF00B67E09 /* LaunchAtLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 85C8AB4B267E28FF00B67E09 /* LaunchAtLogin */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +35,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				85C8AB4C267E28FF00B67E09 /* LaunchAtLogin in Frameworks */,
+				85C8AB49267E27BE00B67E09 /* MenuBuilder in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -89,12 +93,17 @@
 				856112D5264ACD0600FC95AD /* Sources */,
 				856112D6264ACD0600FC95AD /* Frameworks */,
 				856112D7264ACD0600FC95AD /* Resources */,
+				85C8AB4D267E380600B67E09 /* ShellScript */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = ForceClickToRightClick;
+			packageProductDependencies = (
+				85C8AB48267E27BE00B67E09 /* MenuBuilder */,
+				85C8AB4B267E28FF00B67E09 /* LaunchAtLogin */,
+			);
 			productName = ForceClickToRightClick;
 			productReference = 856112D9264ACD0600FC95AD /* ForceClickToRightClick.app */;
 			productType = "com.apple.product-type.application";
@@ -122,6 +131,10 @@
 				Base,
 			);
 			mainGroup = 856112D0264ACD0500FC95AD;
+			packageReferences = (
+				85C8AB47267E27BE00B67E09 /* XCRemoteSwiftPackageReference "MenuBuilder" */,
+				85C8AB4A267E28FF00B67E09 /* XCRemoteSwiftPackageReference "LaunchAtLogin" */,
+			);
 			productRefGroup = 856112DA264ACD0600FC95AD /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -143,6 +156,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		85C8AB4D267E380600B67E09 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${BUILT_PRODUCTS_DIR}/LaunchAtLogin_LaunchAtLogin.bundle/Contents/Resources/copy-helper-swiftpm.sh\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		856112D5264ACD0600FC95AD /* Sources */ = {
@@ -354,6 +387,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		85C8AB47267E27BE00B67E09 /* XCRemoteSwiftPackageReference "MenuBuilder" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/j-f1/MenuBuilder";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+		85C8AB4A267E28FF00B67E09 /* XCRemoteSwiftPackageReference "LaunchAtLogin" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sindresorhus/LaunchAtLogin.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.1.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		85C8AB48267E27BE00B67E09 /* MenuBuilder */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 85C8AB47267E27BE00B67E09 /* XCRemoteSwiftPackageReference "MenuBuilder" */;
+			productName = MenuBuilder;
+		};
+		85C8AB4B267E28FF00B67E09 /* LaunchAtLogin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 85C8AB4A267E28FF00B67E09 /* XCRemoteSwiftPackageReference "LaunchAtLogin" */;
+			productName = LaunchAtLogin;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 856112D1264ACD0500FC95AD /* Project object */;
 }
