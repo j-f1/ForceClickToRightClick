@@ -1,4 +1,4 @@
-#  ForceClickToRightClick
+#  <img src="app-icon.png" height="40" valign=bottom> ForceClickToRightClick
 
 ForceClickToRightClick converts Force Clicks into right/secondary clicks.
 
