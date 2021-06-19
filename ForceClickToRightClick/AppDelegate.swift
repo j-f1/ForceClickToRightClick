@@ -27,7 +27,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   @MenuBuilder func buildMenu() -> [NSMenuItem] {
     let appName = Bundle.main.infoDictionary![kCFBundleNameKey as String]!
-    MenuItem("About \(appName)")
+    MenuItem("About \(appName)…")
       .onSelect {
         NSWorkspace.shared.open(URL(string: "https://github.com/j-f1/ForceClickToRightClick")!)
       }
@@ -36,7 +36,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         NSWorkspace.shared.open(URL(string: "https://github.com/j-f1/ForceClickToRightClick/blob/main/contact.md")!)
       }
     SeparatorItem()
-    MenuItem("Launch At Login")
+    MenuItem("Open at Login")
       .state(LaunchAtLogin.isEnabled ? .on : .off)
       .onSelect {
         LaunchAtLogin.isEnabled.toggle()
