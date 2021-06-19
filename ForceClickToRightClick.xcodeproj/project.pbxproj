@@ -12,6 +12,7 @@
 		856112E4264ACD0800FC95AD /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 856112E3264ACD0800FC95AD /* Preview Assets.xcassets */; };
 		856112E7264ACD0800FC95AD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 856112E5264ACD0800FC95AD /* Main.storyboard */; };
 		856112F0264ADC8B00FC95AD /* CGEventExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 856112EF264ADC8B00FC95AD /* CGEventExtension.swift */; };
+		85C8AB46267E22EC00B67E09 /* EventHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C8AB45267E22EC00B67E09 /* EventHandler.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		856112E9264ACD0800FC95AD /* ForceClickToRightClick.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ForceClickToRightClick.entitlements; sourceTree = "<group>"; };
 		856112EF264ADC8B00FC95AD /* CGEventExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGEventExtension.swift; sourceTree = "<group>"; };
 		8565A45A264F059100E98569 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		85C8AB45267E22EC00B67E09 /* EventHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventHandler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,7 @@
 			isa = PBXGroup;
 			children = (
 				856112DC264ACD0600FC95AD /* AppDelegate.swift */,
+				85C8AB45267E22EC00B67E09 /* EventHandler.swift */,
 				856112EF264ADC8B00FC95AD /* CGEventExtension.swift */,
 				856112E0264ACD0800FC95AD /* Assets.xcassets */,
 				856112E5264ACD0800FC95AD /* Main.storyboard */,
@@ -147,6 +150,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				856112F0264ADC8B00FC95AD /* CGEventExtension.swift in Sources */,
+				85C8AB46267E22EC00B67E09 /* EventHandler.swift in Sources */,
 				856112DD264ACD0600FC95AD /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
