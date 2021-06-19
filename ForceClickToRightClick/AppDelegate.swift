@@ -6,11 +6,10 @@
 //
 
 import Cocoa
-import SwiftUI
 
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
-  var state: State?
+  var state = Wrapper()
 
   func applicationDidFinishLaunching(_: Notification) {
     let eventTap = CGEvent.tapCreate(
@@ -18,11 +17,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       place: .headInsertEventTap,
       options: .defaultTap,
       eventsOfInterest: [.leftMouseDown, .leftMouseUp, .pressure, .leftMouseDragged],
-      callback: { proxy, type, cgEvent, state in
+      callback: { proxy, _, cgEvent, ctx in
 //        print(cgEvent)
         if let event = NSEvent(cgEvent: cgEvent),
-           let state = state?.assumingMemoryBound(to: State?.self) {
-          return handle(event: event, cgEvent: cgEvent, state: state, proxy: proxy)
+           let wrapper = ctx?.load(as: Wrapper.self) {
+          return handle(event: event, cgEvent: cgEvent, wrapper: wrapper, proxy: proxy)
         } else {
           fatalError("Unexpected failure to construct state or NSEvent")
         }
