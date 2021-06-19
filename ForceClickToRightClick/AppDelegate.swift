@@ -1,6 +1,6 @@
 //
 //  AppDelegate.swift
-//  RightForce
+//  ForceClickToRightClick
 //
 //  Created by Jed Fox on 5/11/21.
 //

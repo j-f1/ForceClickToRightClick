@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "856112D8264ACD0600FC95AD"
-               BuildableName = "RightForce.app"
-               BlueprintName = "RightForce"
-               ReferencedContainer = "container:RightForce.xcodeproj">
+               BuildableName = "ForceClickToRightClick.app"
+               BlueprintName = "ForceClickToRightClick"
+               ReferencedContainer = "container:ForceClickToRightClick.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -45,9 +45,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "856112D8264ACD0600FC95AD"
-            BuildableName = "RightForce.app"
-            BlueprintName = "RightForce"
-            ReferencedContainer = "container:RightForce.xcodeproj">
+            BuildableName = "ForceClickToRightClick.app"
+            BlueprintName = "ForceClickToRightClick"
+            ReferencedContainer = "container:ForceClickToRightClick.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -62,9 +62,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "856112D8264ACD0600FC95AD"
-            BuildableName = "RightForce.app"
-            BlueprintName = "RightForce"
-            ReferencedContainer = "container:RightForce.xcodeproj">
+            BuildableName = "ForceClickToRightClick.app"
+            BlueprintName = "ForceClickToRightClick"
+            ReferencedContainer = "container:ForceClickToRightClick.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

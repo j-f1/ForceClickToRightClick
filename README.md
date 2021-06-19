@@ -1,6 +1,6 @@
-#  RightForce
+#  ForceClickToRightClick
 
-RightForce converts Force Clicks into right/secondary clicks.
+ForceClickToRightClick converts Force Clicks into right/secondary clicks.
 
 ## The algorithm
 
