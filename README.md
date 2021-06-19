@@ -2,6 +2,16 @@
 
 ForceClickToRightClick converts Force Clicks into right/secondary clicks.
 
+## Security/privacy concerns
+
+- This app does not log or transmit any events. All data is stored in memory and is deleted when you release the mouse button.
+- This app only receives the following events:
+  - Left Mouse Down
+  - Left Mouse Up
+  - Pressure Change
+  - Left Mouse Dragged
+- Notably, this app does not access your keyboard/typing behavior in any way.
+
 ## The algorithm
 
 (See `EventHandler.swift` for the code, which is ordered slightly differently from this explanation)
