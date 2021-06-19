@@ -75,7 +75,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             return nil
           }
         } else {
-          fatalError("Unexpected failure to construct state or NSEvent")
+          print("Unexpected failure to construct state or NSEvent")
+          return .passUnretained(cgEvent)
         }
       }, userInfo: &state)
     if let eventTap = eventTap {
