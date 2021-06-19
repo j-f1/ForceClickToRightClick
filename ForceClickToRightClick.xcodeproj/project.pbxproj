@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		856112DD264ACD0600FC95AD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 856112DC264ACD0600FC95AD /* AppDelegate.swift */; };
-		856112DF264ACD0600FC95AD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 856112DE264ACD0600FC95AD /* ContentView.swift */; };
 		856112E1264ACD0800FC95AD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 856112E0264ACD0800FC95AD /* Assets.xcassets */; };
 		856112E4264ACD0800FC95AD /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 856112E3264ACD0800FC95AD /* Preview Assets.xcassets */; };
 		856112E7264ACD0800FC95AD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 856112E5264ACD0800FC95AD /* Main.storyboard */; };
@@ -18,7 +17,6 @@
 /* Begin PBXFileReference section */
 		856112D9264ACD0600FC95AD /* ForceClickToRightClick.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ForceClickToRightClick.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		856112DC264ACD0600FC95AD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		856112DE264ACD0600FC95AD /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		856112E0264ACD0800FC95AD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		856112E3264ACD0800FC95AD /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		856112E6264ACD0800FC95AD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -61,7 +59,6 @@
 			children = (
 				856112DC264ACD0600FC95AD /* AppDelegate.swift */,
 				856112EF264ADC8B00FC95AD /* CGEventExtension.swift */,
-				856112DE264ACD0600FC95AD /* ContentView.swift */,
 				856112E0264ACD0800FC95AD /* Assets.xcassets */,
 				856112E5264ACD0800FC95AD /* Main.storyboard */,
 				856112E8264ACD0800FC95AD /* Info.plist */,
@@ -150,7 +147,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				856112F0264ADC8B00FC95AD /* CGEventExtension.swift in Sources */,
-				856112DF264ACD0600FC95AD /* ContentView.swift in Sources */,
 				856112DD264ACD0600FC95AD /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

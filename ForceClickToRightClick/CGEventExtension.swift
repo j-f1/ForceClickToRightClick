@@ -73,6 +73,5 @@ extension CGEventMask: OptionSet {
   public mutating func update(with newMember: __owned CGEventType) -> CGEventType? {
     let result = insert(newMember)
     return result.inserted ? nil : newMember
-
   }
 }
