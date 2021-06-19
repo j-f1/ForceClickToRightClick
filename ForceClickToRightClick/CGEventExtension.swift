@@ -56,7 +56,7 @@ extension CGEventMask: OptionSet {
   }
 
   @inlinable public mutating func insert(_ newMember: __owned CGEventType) -> (inserted: Bool, memberAfterInsert: CGEventType) {
-    let result = (inserted: contains(newMember), memberAfterInsert: newMember)
+    let result = (inserted: !contains(newMember), memberAfterInsert: newMember)
     self |= newMember.maskValue
     return result
   }
