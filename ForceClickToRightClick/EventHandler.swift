@@ -96,7 +96,7 @@ func handle(event: NSEvent, cgEvent: CGEvent, wrapper: Wrapper, proxy: CGEventTa
         state.isRight = true
         state.task.cancel()
         state.replay(into: proxy, from: cgEvent, isRight: true)
-        return cgEvent.switchToRight()!
+        return nil
       } else {
         return nil
       }
