@@ -41,6 +41,20 @@ class Wrapper {
   }
 }
 
+extension CGEvent {
+  fileprivate func switchToRight() -> CGEvent? {
+    guard let copy = self.copy() else { return nil }
+    switch copy.type {
+    case .leftMouseDown: copy.type = .rightMouseDown
+    case .leftMouseDragged: copy.type = .rightMouseDragged
+    case .leftMouseUp: copy.type = .rightMouseUp
+    default: return nil
+    }
+    copy.setIntegerValueField(.mouseEventButtonNumber, value: Int64(CGMouseButton.right.rawValue))
+    return copy
+  }
+}
+
 func handle(event: NSEvent, cgEvent: CGEvent, wrapper: Wrapper, proxy: CGEventTapProxy) -> CGEvent? {
   if event.type == .leftMouseDown {
     let state = Wrapper.State(mouseDownEvent: cgEvent)
@@ -56,10 +70,7 @@ func handle(event: NSEvent, cgEvent: CGEvent, wrapper: Wrapper, proxy: CGEventTa
       defer { wrapper.state = nil }
 //      print("replaying: mouse up")
       if state.isRight {
-        let copy = cgEvent.copy()!
-        copy.type = .rightMouseUp
-        copy.setIntegerValueField(.mouseEventButtonNumber, value: Int64(CGMouseButton.right.rawValue))
-        return copy
+        return cgEvent.switchToRight()!
       } else {
         state.replay(into: proxy, from: cgEvent, isRight: false)
         return cgEvent
@@ -67,10 +78,7 @@ func handle(event: NSEvent, cgEvent: CGEvent, wrapper: Wrapper, proxy: CGEventTa
     } else if event.type == .leftMouseDragged {
       let distanceSq = pow(cgEvent.location.x - state.mouseDownEvent.location.x, 2) + pow(cgEvent.location.y - state.mouseDownEvent.location.y, 2)
       if state.isRight {
-        let copy = cgEvent.copy()!
-        copy.type = .rightMouseDragged
-        copy.setIntegerValueField(.mouseEventButtonNumber, value: Int64(CGMouseButton.right.rawValue))
-        return copy
+        return cgEvent.switchToRight()!
       } else if distanceSq >= pow(8, 2) {
 //        print("replaying: out of bounds")
         state.replay(into: proxy, from: cgEvent, isRight: false)
@@ -88,10 +96,7 @@ func handle(event: NSEvent, cgEvent: CGEvent, wrapper: Wrapper, proxy: CGEventTa
         state.isRight = true
         state.task.cancel()
         state.replay(into: proxy, from: cgEvent, isRight: true)
-        let copy = cgEvent.copy()!
-        copy.type = .rightMouseDown
-        copy.setIntegerValueField(.mouseEventButtonNumber, value: Int64(CGMouseButton.right.rawValue))
-        return copy
+        return cgEvent.switchToRight()!
       } else {
         return nil
       }
