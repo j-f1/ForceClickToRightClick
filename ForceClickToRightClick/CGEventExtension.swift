@@ -8,11 +8,11 @@
 import Foundation
 
 extension CGEventType {
-  static var pressure = CGEventType(rawValue: 29)!
+  public static var pressure = CGEventType(rawValue: 29)!
 
-  fileprivate var mask: CGEventMask { 1 << rawValue }
+  @inlinable public var maskValue: CGEventMask { 1 << rawValue }
 
-  var description: String {
+  public var description: String {
     switch self {
     case .null: return "CGEventType.null"
     case .leftMouseDown: return "CGEventType.leftMouseDown"
@@ -45,32 +45,32 @@ extension CGEventMask: OptionSet {
 
   public typealias Element = CGEventType
 
-  public init() { self = 0 }
+  @inlinable public init() { self = 0 }
 
-  public init(rawValue: Self) {
+  @inlinable public init(rawValue: Self) {
     self = rawValue
   }
 
-  public func contains(_ member: CGEventType) -> Bool {
-    (self & member.mask) != 0
+  @inlinable public func contains(_ member: CGEventType) -> Bool {
+    (self & member.maskValue) != 0
   }
 
-  public mutating func insert(_ newMember: __owned CGEventType) -> (inserted: Bool, memberAfterInsert: CGEventType) {
+  @inlinable public mutating func insert(_ newMember: __owned CGEventType) -> (inserted: Bool, memberAfterInsert: CGEventType) {
     let result = (inserted: contains(newMember), memberAfterInsert: newMember)
-    self |= newMember.mask
+    self |= newMember.maskValue
     return result
   }
 
-  public mutating func remove(_ member: CGEventType) -> CGEventType? {
+  @inlinable public mutating func remove(_ member: CGEventType) -> CGEventType? {
     if contains(member) {
-      self ^= member.mask
+      self ^= member.maskValue
       return member
     } else {
       return nil
     }
   }
 
-  public mutating func update(with newMember: __owned CGEventType) -> CGEventType? {
+  @inlinable public mutating func update(with newMember: __owned CGEventType) -> CGEventType? {
     let result = insert(newMember)
     return result.inserted ? nil : newMember
   }
