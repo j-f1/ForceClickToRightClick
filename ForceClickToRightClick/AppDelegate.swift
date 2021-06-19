@@ -33,7 +33,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       }
     MenuItem("Send Feedback…")
       .onSelect {
-        NSWorkspace.shared.open(URL(string: "https://j-f1.github.io/ForceClickToRightClick/contact.html")!)
+        NSWorkspace.shared.open(URL(string: "https://github.com/j-f1/ForceClickToRightClick/blob/main/contact.md")!)
       }
     SeparatorItem()
     MenuItem("Launch At Login")
