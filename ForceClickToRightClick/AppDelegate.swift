@@ -13,7 +13,7 @@ import LaunchAtLogin
 class AppDelegate: NSObject, NSApplicationDelegate {
   var state = Wrapper()
 
-  let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
+  let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
 
   func applicationDidFinishLaunching(_: Notification) {
     createEventTap()
@@ -22,7 +22,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   func initStatusItem() {
     statusItem.menu = NSMenu(buildMenu)
-    statusItem.button?.title = "*** "
+    statusItem.button?.image = NSImage(named: "Menu Bar Icon")
   }
 
   @MenuBuilder func buildMenu() -> [NSMenuItem] {
