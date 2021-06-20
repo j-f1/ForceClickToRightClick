@@ -6,13 +6,20 @@
 //
 
 import Cocoa
+import LaunchAtLogin
 
 let HasSentPermissionPrompt = "HasSentPermissionPrompt"
 
 class WelcomeViewController: NSViewController, NSWindowDelegate {
 
   @IBOutlet weak var button: NSButton!
-  @IBOutlet weak var instructions: NSTextField!
+  @IBOutlet weak var instructionsLabel: NSTextField!
+  @IBOutlet weak var rationaleLabel: NSTextField!
+
+  @IBOutlet weak var menuInstructions: NSView!
+  @IBOutlet weak var launchAtLoginPref: NSView!
+
+  @objc dynamic var launchAtLogin = LaunchAtLogin.kvo
 
   var onComplete: (() -> ())?
 
@@ -41,14 +48,18 @@ class WelcomeViewController: NSViewController, NSWindowDelegate {
   func updateText() {
     if AXIsProcessTrusted() {
       onComplete?()
-      button.isEnabled = false
-      instructions.stringValue = "Access granted! Close this window to begin using ForceClickToRightClick."
-      instructions.textColor = NSColor.systemGreen.blended(withFraction: 0.5, of: .labelColor)
+      button.isHidden = true
+      instructionsLabel.stringValue = "Access granted! Close this window to begin using ForceClickToRightClick."
+      instructionsLabel.textColor = NSColor.systemGreen.blended(withFraction: 0.5, of: .labelColor)
+
+      menuInstructions.isHidden = false
+      launchAtLoginPref.isHidden = false
+      rationaleLabel.isHidden = true
       return
     }
     if UserDefaults.standard.bool(forKey: HasSentPermissionPrompt) {
       button.title = "Open System Preferences"
-      instructions.stringValue = """
+      instructionsLabel.stringValue = """
       1. Click the “Open System Preferences” button above
       2. Click the lock at the bottom left to unlock the settings if necessary
       3. Scroll the list on the right until you see “ForceClickToRightClick”
@@ -57,7 +68,7 @@ class WelcomeViewController: NSViewController, NSWindowDelegate {
       """
     } else {
       button.title = "Request Access"
-      instructions.stringValue = """
+      instructionsLabel.stringValue = """
       1. Click the “Open System Preferences” button in the dialog that appears
       2. Click the lock at the bottom left to unlock the settings if necessary
       3. Scroll the list on the right until you see “ForceClickToRightClick”

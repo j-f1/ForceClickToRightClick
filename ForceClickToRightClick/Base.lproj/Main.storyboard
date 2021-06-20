@@ -710,85 +710,171 @@
         <scene sceneID="vFM-96-NsI">
             <objects>
                 <viewController id="4qf-6n-HCi" customClass="WelcomeViewController" customModule="ForceClickToRightClick" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="aj2-JW-qNj">
-                        <rect key="frame" x="0.0" y="0.0" width="500" height="299"/>
-                        <autoresizingMask key="autoresizingMask"/>
+                    <view key="view" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="aj2-JW-qNj">
+                        <rect key="frame" x="0.0" y="0.0" width="583" height="314"/>
                         <subviews>
                             <visualEffectView blendingMode="behindWindow" material="underWindowBackground" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="v1e-qo-SXO">
-                                <rect key="frame" x="0.0" y="0.0" width="500" height="299"/>
+                                <rect key="frame" x="0.0" y="0.0" width="583" height="314"/>
                             </visualEffectView>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="JmS-Hw-sh8">
-                                <rect key="frame" x="18" y="228" width="464" height="21"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="macOS Permissions for ForceClickToRightClick" id="fje-8z-wom">
-                                    <font key="font" textStyle="title2" name=".SFNS-Regular"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="UNz-kV-yTb">
-                                <rect key="frame" x="18" y="188" width="464" height="32"/>
-                                <textFieldCell key="cell" alignment="center" title="ForceClickToRightClick needs accessibility permission to manage mouse events so that it can function." id="SNP-sA-mlv">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <button wantsLayer="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ji7-66-gP6">
-                                <rect key="frame" x="175" y="129" width="151" height="40"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="139" id="aPo-s2-HfQ"/>
-                                </constraints>
-                                <buttonCell key="cell" type="push" title="Request Access" bezelStyle="rounded" alignment="center" controlSize="large" borderStyle="border" inset="2" id="ZwJ-Mi-3JE">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                    <string key="keyEquivalent" base64-UTF8="YES">
+                            <stackView distribution="fill" orientation="vertical" alignment="centerX" spacing="39" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="241.99998474121094" verticalHuggingPriority="249" verticalCompressionResistancePriority="1000" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="j3i-Au-gwA">
+                                <rect key="frame" x="20" y="20" width="543" height="262"/>
+                                <subviews>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="JmS-Hw-sh8">
+                                        <rect key="frame" x="89" y="241" width="365" height="21"/>
+                                        <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="macOS Permissions for ForceClickToRightClick" id="fje-8z-wom">
+                                            <font key="font" textStyle="title2" name=".SFNS-Regular"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="UNz-kV-yTb">
+                                        <rect key="frame" x="-2" y="170" width="547" height="32"/>
+                                        <textFieldCell key="cell" alignment="center" title="ForceClickToRightClick needs accessibility permission to manage mouse events so that it can function." id="SNP-sA-mlv">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <button wantsLayer="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ji7-66-gP6">
+                                        <rect key="frame" x="196" y="97" width="151" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="139" id="aPo-s2-HfQ"/>
+                                        </constraints>
+                                        <buttonCell key="cell" type="push" title="Request Access" bezelStyle="rounded" alignment="center" controlSize="large" borderStyle="border" inset="2" id="ZwJ-Mi-3JE">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                            <string key="keyEquivalent" base64-UTF8="YES">
 DQ
 </string>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="requestAccess:" target="4qf-6n-HCi" id="75T-Q9-kVr"/>
-                                </connections>
-                            </button>
-                            <textField wantsLayer="YES" horizontalHuggingPriority="252" translatesAutoresizingMaskIntoConstraints="NO" id="OLp-Yf-0Wa">
-                                <rect key="frame" x="18" y="30" width="465" height="80"/>
-                                <textFieldCell key="cell" alignment="left" id="Ivi-K6-2Fd">
-                                    <font key="font" metaFont="system"/>
-                                    <string key="title">      1. Click the “Open System Preferences” button in the dialog that appears
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="requestAccess:" target="4qf-6n-HCi" id="75T-Q9-kVr"/>
+                                        </connections>
+                                    </button>
+                                    <customView hidden="YES" translatesAutoresizingMaskIntoConstraints="NO" id="au8-S9-tmE">
+                                        <rect key="frame" x="0.0" y="226" width="344" height="36"/>
+                                        <subviews>
+                                            <imageView horizontalHuggingPriority="256" verticalHuggingPriority="261" translatesAutoresizingMaskIntoConstraints="NO" id="Kb1-S0-fCc">
+                                                <rect key="frame" x="0.0" y="0.0" width="36" height="36"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="Kb1-S0-fCc" secondAttribute="height" multiplier="1:1" id="H7f-Ge-haa"/>
+                                                </constraints>
+                                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="Menu Bar Icon" id="Sas-u4-43H"/>
+                                            </imageView>
+                                            <textField horizontalHuggingPriority="253" verticalHuggingPriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="f68-Eg-kup">
+                                                <rect key="frame" x="42" y="2" width="304" height="32"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="300" id="h38-FT-NeF"/>
+                                                </constraints>
+                                                <textFieldCell key="cell" title="Select this icon in the menu bar to send feedback or quit ForceClickToRightClick." id="oHt-d6-Rkl">
+                                                    <font key="font" usesAppearanceFont="YES"/>
+                                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                </textFieldCell>
+                                            </textField>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="f68-Eg-kup" secondAttribute="trailing" id="Gdd-QB-LtM"/>
+                                            <constraint firstItem="Kb1-S0-fCc" firstAttribute="firstBaseline" secondItem="f68-Eg-kup" secondAttribute="firstBaseline" id="Nqq-vB-aNB"/>
+                                            <constraint firstItem="f68-Eg-kup" firstAttribute="leading" secondItem="Kb1-S0-fCc" secondAttribute="trailing" constant="8" id="RLu-CZ-cFT"/>
+                                            <constraint firstItem="Kb1-S0-fCc" firstAttribute="top" secondItem="au8-S9-tmE" secondAttribute="top" id="h7U-Vu-d8B"/>
+                                            <constraint firstItem="Kb1-S0-fCc" firstAttribute="leading" secondItem="au8-S9-tmE" secondAttribute="leading" id="lbi-EJ-mtg"/>
+                                            <constraint firstAttribute="bottom" secondItem="f68-Eg-kup" secondAttribute="bottom" constant="2" id="mMk-dE-oo2"/>
+                                            <constraint firstItem="f68-Eg-kup" firstAttribute="top" secondItem="au8-S9-tmE" secondAttribute="top" constant="2" id="nBm-D3-DDD"/>
+                                            <constraint firstAttribute="bottom" secondItem="Kb1-S0-fCc" secondAttribute="bottom" id="x7T-9m-qe6"/>
+                                        </constraints>
+                                    </customView>
+                                    <customView hidden="YES" horizontalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="paI-Hd-WJC">
+                                        <rect key="frame" x="0.0" y="242" width="220" height="20"/>
+                                        <subviews>
+                                            <textField horizontalHuggingPriority="253" verticalHuggingPriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="oqi-Ou-sBT">
+                                                <rect key="frame" x="-2" y="2" width="99" height="16"/>
+                                                <textFieldCell key="cell" title="Recommended:" usesSingleLineMode="YES" id="xQK-FY-uKx">
+                                                    <font key="font" metaFont="systemBold"/>
+                                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                </textFieldCell>
+                                            </textField>
+                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FjM-PO-kRk">
+                                                <rect key="frame" x="109" y="1" width="111" height="18"/>
+                                                <buttonCell key="cell" type="check" title="Open at Login" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="3Pb-kj-ew8">
+                                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                </buttonCell>
+                                                <connections>
+                                                    <binding destination="4qf-6n-HCi" name="value" keyPath="launchAtLogin.isEnabled" id="j7J-37-OYn"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="oqi-Ou-sBT" firstAttribute="top" secondItem="paI-Hd-WJC" secondAttribute="top" constant="2" id="3so-p4-vgv"/>
+                                            <constraint firstAttribute="trailing" secondItem="FjM-PO-kRk" secondAttribute="trailing" id="dZK-ul-Vzg"/>
+                                            <constraint firstItem="FjM-PO-kRk" firstAttribute="firstBaseline" secondItem="oqi-Ou-sBT" secondAttribute="firstBaseline" id="o6V-FS-dM3"/>
+                                            <constraint firstItem="FjM-PO-kRk" firstAttribute="leading" secondItem="oqi-Ou-sBT" secondAttribute="trailing" constant="16" id="ow2-Fb-FDr"/>
+                                            <constraint firstAttribute="leading" secondItem="oqi-Ou-sBT" secondAttribute="leading" id="vdL-wU-BJb"/>
+                                            <constraint firstAttribute="bottom" secondItem="oqi-Ou-sBT" secondAttribute="bottom" constant="2" id="xbG-hB-HOB"/>
+                                        </constraints>
+                                    </customView>
+                                    <textField wantsLayer="YES" horizontalHuggingPriority="252" verticalHuggingPriority="1000" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="OLp-Yf-0Wa">
+                                        <rect key="frame" x="39" y="0.0" width="465" height="64"/>
+                                        <textFieldCell key="cell" alignment="left" id="Ivi-K6-2Fd">
+                                            <font key="font" metaFont="system"/>
+                                            <string key="title">      1. Click the “Open System Preferences” button in the dialog that appears
       2. Scroll the list on the right until you see “ForceClickToRightClick”
       3. Check the checkbox next to “ForceClickToRightClick”
-      4. Quit System Preferences and reopen this window
-</string>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
+      4. Quit System Preferences and reopen this window</string>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="au8-S9-tmE" firstAttribute="width" relation="lessThanOrEqual" secondItem="j3i-Au-gwA" secondAttribute="width" id="6p6-GT-bq5"/>
+                                </constraints>
+                                <visibilityPriorities>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                </visibilityPriorities>
+                                <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                </customSpacing>
+                            </stackView>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="ji7-66-gP6" firstAttribute="top" secondItem="UNz-kV-yTb" secondAttribute="bottom" constant="25" id="6AT-Ap-3Xb"/>
-                            <constraint firstAttribute="bottom" secondItem="OLp-Yf-0Wa" secondAttribute="bottom" constant="30" id="ApN-Oh-pCW"/>
                             <constraint firstAttribute="trailing" secondItem="v1e-qo-SXO" secondAttribute="trailing" id="Bfz-GB-CaO"/>
                             <constraint firstAttribute="bottom" secondItem="v1e-qo-SXO" secondAttribute="bottom" id="Ce6-VB-NvU"/>
-                            <constraint firstAttribute="trailing" secondItem="UNz-kV-yTb" secondAttribute="trailing" constant="20" symbolic="YES" id="Dx0-kO-jT9"/>
                             <constraint firstItem="v1e-qo-SXO" firstAttribute="leading" secondItem="aj2-JW-qNj" secondAttribute="leading" id="LCu-nG-JDt"/>
-                            <constraint firstItem="ji7-66-gP6" firstAttribute="centerX" secondItem="aj2-JW-qNj" secondAttribute="centerX" id="Q1l-Dj-zJv"/>
-                            <constraint firstItem="JmS-Hw-sh8" firstAttribute="top" secondItem="v1e-qo-SXO" secondAttribute="top" constant="50" id="Vx5-ja-drt"/>
+                            <constraint firstAttribute="trailing" secondItem="j3i-Au-gwA" secondAttribute="trailing" constant="20" symbolic="YES" id="OWo-r9-UrM"/>
+                            <constraint firstItem="j3i-Au-gwA" firstAttribute="top" secondItem="aj2-JW-qNj" secondAttribute="top" constant="32" id="PAr-wh-cp8"/>
+                            <constraint firstAttribute="bottom" secondItem="j3i-Au-gwA" secondAttribute="bottom" constant="20" symbolic="YES" id="bVv-tf-05f"/>
                             <constraint firstItem="v1e-qo-SXO" firstAttribute="top" secondItem="aj2-JW-qNj" secondAttribute="top" id="cKL-SZ-ZY7"/>
-                            <constraint firstItem="OLp-Yf-0Wa" firstAttribute="top" secondItem="ji7-66-gP6" secondAttribute="bottom" constant="25" id="dto-zo-EGs"/>
-                            <constraint firstItem="UNz-kV-yTb" firstAttribute="top" secondItem="JmS-Hw-sh8" secondAttribute="bottom" constant="8" symbolic="YES" id="gUd-Es-I6l"/>
-                            <constraint firstItem="UNz-kV-yTb" firstAttribute="leading" secondItem="aj2-JW-qNj" secondAttribute="leading" constant="20" symbolic="YES" id="gcL-Rt-wT7"/>
-                            <constraint firstAttribute="trailing" secondItem="JmS-Hw-sh8" secondAttribute="trailing" constant="20" symbolic="YES" id="heb-lg-IdB"/>
-                            <constraint firstItem="JmS-Hw-sh8" firstAttribute="leading" secondItem="aj2-JW-qNj" secondAttribute="leading" constant="20" symbolic="YES" id="kdb-OF-wPk"/>
-                            <constraint firstItem="OLp-Yf-0Wa" firstAttribute="centerX" secondItem="aj2-JW-qNj" secondAttribute="centerX" id="wwM-cL-FaL"/>
+                            <constraint firstItem="j3i-Au-gwA" firstAttribute="leading" secondItem="aj2-JW-qNj" secondAttribute="leading" constant="20" symbolic="YES" id="iVx-jp-Whe"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="button" destination="ji7-66-gP6" id="dBd-xN-9l8"/>
-                        <outlet property="instructions" destination="OLp-Yf-0Wa" id="v5b-Ca-nQS"/>
+                        <outlet property="instructionsLabel" destination="OLp-Yf-0Wa" id="v5b-Ca-nQS"/>
+                        <outlet property="launchAtLoginPref" destination="paI-Hd-WJC" id="e10-at-YFF"/>
+                        <outlet property="menuInstructions" destination="au8-S9-tmE" id="4vE-p3-ebC"/>
+                        <outlet property="rationaleLabel" destination="UNz-kV-yTb" id="SUt-4h-tUG"/>
                     </connections>
                 </viewController>
                 <customObject id="Mqm-s4-rUG" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <userDefaultsController representsSharedInstance="YES" id="kXI-tJ-3wu"/>
             </objects>
-            <point key="canvasLocation" x="79" y="352.5"/>
+            <point key="canvasLocation" x="78.5" y="351"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Menu Bar Icon" width="14" height="15"/>
+    </resources>
 </document>
