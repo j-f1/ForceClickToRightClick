@@ -43,15 +43,27 @@ class WelcomeViewController: NSViewController, NSWindowDelegate {
       onComplete?()
       button.isEnabled = false
       instructions.stringValue = "Access granted! Close this window to begin using ForceClickToRightClick."
-      instructions.textColor = NSColor.systemGreen
+      instructions.textColor = NSColor.systemGreen.blended(withFraction: 0.5, of: .labelColor)
       return
     }
     if UserDefaults.standard.bool(forKey: HasSentPermissionPrompt) {
       button.title = "Open System Preferences"
-      instructions.stringValue = "Then check the “ForceClickToRightClick” checkbox in Security & Privacy \u{2192} Privacy \u{2192} Accessibility to grant access."
+      instructions.stringValue = """
+      1. Click the “Open System Preferences” button above
+      2. Click the lock at the bottom left to unlock the settings if necessary
+      3. Scroll the list on the right until you see “ForceClickToRightClick”
+      4. Check the checkbox next to “ForceClickToRightClick”
+      5. Close System Preferences and return to this window
+      """
     } else {
       button.title = "Request Access"
-      instructions.stringValue = "Then click “Open System Preferences” and check the “ForceClickToRightClick” checkbox in Security & Privacy \u{2192} Privacy \u{2192} Accessibility to grant access."
+      instructions.stringValue = """
+      1. Click the “Open System Preferences” button in the dialog that appears
+      2. Click the lock at the bottom left to unlock the settings if necessary
+      3. Scroll the list on the right until you see “ForceClickToRightClick”
+      4. Check the checkbox next to “ForceClickToRightClick”
+      5. Close System Preferences and return to this window
+      """
     }
   }
 

@@ -687,10 +687,11 @@
                 <windowController storyboardIdentifier="WelcomeWindow" id="f0c-jB-2DT" sceneMemberID="viewController">
                     <window key="window" title="ForceClickToRightClick" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" titlebarAppearsTransparent="YES" titleVisibility="hidden" id="G1a-dV-qXe">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" fullSizeContentView="YES"/>
-                        <rect key="contentRect" x="245" y="301" width="480" height="270"/>
+                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+                        <rect key="contentRect" x="834" y="488" width="480" height="271"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1025"/>
                         <view key="contentView" id="5yK-N6-yIW">
-                            <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                            <rect key="frame" x="0.0" y="0.0" width="480" height="271"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </view>
                         <connections>
@@ -703,21 +704,21 @@
                 </windowController>
                 <customObject id="rEu-aM-Uhr" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="79" y="262"/>
+            <point key="canvasLocation" x="79" y="261.5"/>
         </scene>
         <!--Welcome View Controller-->
         <scene sceneID="vFM-96-NsI">
             <objects>
                 <viewController id="4qf-6n-HCi" customClass="WelcomeViewController" customModule="ForceClickToRightClick" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="aj2-JW-qNj">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="267"/>
+                        <rect key="frame" x="0.0" y="0.0" width="500" height="299"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <visualEffectView blendingMode="behindWindow" material="popover" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="v1e-qo-SXO">
-                                <rect key="frame" x="0.0" y="0.0" width="480" height="267"/>
+                            <visualEffectView blendingMode="behindWindow" material="underWindowBackground" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="v1e-qo-SXO">
+                                <rect key="frame" x="0.0" y="0.0" width="500" height="299"/>
                             </visualEffectView>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="JmS-Hw-sh8">
-                                <rect key="frame" x="18" y="196" width="444" height="21"/>
+                                <rect key="frame" x="18" y="228" width="464" height="21"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="macOS Permissions for ForceClickToRightClick" id="fje-8z-wom">
                                     <font key="font" textStyle="title2" name=".SFNS-Regular"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -725,7 +726,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="UNz-kV-yTb">
-                                <rect key="frame" x="18" y="156" width="444" height="32"/>
+                                <rect key="frame" x="18" y="188" width="464" height="32"/>
                                 <textFieldCell key="cell" alignment="center" title="ForceClickToRightClick needs accessibility permission to manage mouse events so that it can function." id="SNP-sA-mlv">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -733,7 +734,7 @@
                                 </textFieldCell>
                             </textField>
                             <button wantsLayer="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ji7-66-gP6">
-                                <rect key="frame" x="165" y="97" width="151" height="40"/>
+                                <rect key="frame" x="175" y="129" width="151" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="139" id="aPo-s2-HfQ"/>
                                 </constraints>
@@ -748,14 +749,16 @@ DQ
                                     <action selector="requestAccess:" target="4qf-6n-HCi" id="75T-Q9-kVr"/>
                                 </connections>
                             </button>
-                            <textField wantsLayer="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="OLp-Yf-0Wa">
-                                <rect key="frame" x="88" y="30" width="304" height="48"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="300" id="ziG-Mx-any"/>
-                                </constraints>
-                                <textFieldCell key="cell" alignment="center" title="Then check the “ForceClickToRightClick” checkbox in System Preferences to grant access." id="Ivi-K6-2Fd">
+                            <textField wantsLayer="YES" horizontalHuggingPriority="252" translatesAutoresizingMaskIntoConstraints="NO" id="OLp-Yf-0Wa">
+                                <rect key="frame" x="18" y="30" width="465" height="80"/>
+                                <textFieldCell key="cell" alignment="left" id="Ivi-K6-2Fd">
                                     <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                    <string key="title">      1. Click the “Open System Preferences” button in the dialog that appears
+      2. Scroll the list on the right until you see “ForceClickToRightClick”
+      3. Check the checkbox next to “ForceClickToRightClick”
+      4. Quit System Preferences and reopen this window
+</string>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
