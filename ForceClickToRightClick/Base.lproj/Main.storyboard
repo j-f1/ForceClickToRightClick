@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
+        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="18122"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Application-->
@@ -673,11 +675,117 @@
                         <outlet property="delegate" destination="Voe-Tx-rLC" id="PrD-fu-P6m"/>
                     </connections>
                 </application>
-                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModuleProvider="target"/>
+                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="ForceClickToRightClick" customModuleProvider="target"/>
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="75" y="0.0"/>
+        </scene>
+        <!--Window Controller-->
+        <scene sceneID="6RS-3d-b8h">
+            <objects>
+                <windowController storyboardIdentifier="WelcomeWindow" id="f0c-jB-2DT" sceneMemberID="viewController">
+                    <window key="window" title="ForceClickToRightClick" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" titlebarAppearsTransparent="YES" titleVisibility="hidden" id="G1a-dV-qXe">
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES" fullSizeContentView="YES"/>
+                        <rect key="contentRect" x="245" y="301" width="480" height="270"/>
+                        <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1025"/>
+                        <view key="contentView" id="5yK-N6-yIW">
+                            <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </view>
+                        <connections>
+                            <outlet property="delegate" destination="f0c-jB-2DT" id="G4o-j7-o62"/>
+                        </connections>
+                    </window>
+                    <connections>
+                        <segue destination="4qf-6n-HCi" kind="relationship" relationship="window.shadowedContentViewController" id="iE4-Sn-GkO"/>
+                    </connections>
+                </windowController>
+                <customObject id="rEu-aM-Uhr" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="79" y="262"/>
+        </scene>
+        <!--Welcome View Controller-->
+        <scene sceneID="vFM-96-NsI">
+            <objects>
+                <viewController id="4qf-6n-HCi" customClass="WelcomeViewController" customModule="ForceClickToRightClick" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="aj2-JW-qNj">
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="267"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <visualEffectView blendingMode="behindWindow" material="popover" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="v1e-qo-SXO">
+                                <rect key="frame" x="0.0" y="0.0" width="480" height="267"/>
+                            </visualEffectView>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="JmS-Hw-sh8">
+                                <rect key="frame" x="18" y="196" width="444" height="21"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="macOS Permissions for ForceClickToRightClick" id="fje-8z-wom">
+                                    <font key="font" textStyle="title2" name=".SFNS-Regular"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="UNz-kV-yTb">
+                                <rect key="frame" x="18" y="156" width="444" height="32"/>
+                                <textFieldCell key="cell" alignment="center" title="ForceClickToRightClick needs accessibility permission to manage mouse events so that it can function." id="SNP-sA-mlv">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <button wantsLayer="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ji7-66-gP6">
+                                <rect key="frame" x="165" y="97" width="151" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="139" id="aPo-s2-HfQ"/>
+                                </constraints>
+                                <buttonCell key="cell" type="push" title="Request Access" bezelStyle="rounded" alignment="center" controlSize="large" borderStyle="border" inset="2" id="ZwJ-Mi-3JE">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                    <string key="keyEquivalent" base64-UTF8="YES">
+DQ
+</string>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="requestAccess:" target="4qf-6n-HCi" id="75T-Q9-kVr"/>
+                                </connections>
+                            </button>
+                            <textField wantsLayer="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="OLp-Yf-0Wa">
+                                <rect key="frame" x="88" y="30" width="304" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="ziG-Mx-any"/>
+                                </constraints>
+                                <textFieldCell key="cell" alignment="center" title="Then check the “ForceClickToRightClick” checkbox in System Preferences to grant access." id="Ivi-K6-2Fd">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="ji7-66-gP6" firstAttribute="top" secondItem="UNz-kV-yTb" secondAttribute="bottom" constant="25" id="6AT-Ap-3Xb"/>
+                            <constraint firstAttribute="bottom" secondItem="OLp-Yf-0Wa" secondAttribute="bottom" constant="30" id="ApN-Oh-pCW"/>
+                            <constraint firstAttribute="trailing" secondItem="v1e-qo-SXO" secondAttribute="trailing" id="Bfz-GB-CaO"/>
+                            <constraint firstAttribute="bottom" secondItem="v1e-qo-SXO" secondAttribute="bottom" id="Ce6-VB-NvU"/>
+                            <constraint firstAttribute="trailing" secondItem="UNz-kV-yTb" secondAttribute="trailing" constant="20" symbolic="YES" id="Dx0-kO-jT9"/>
+                            <constraint firstItem="v1e-qo-SXO" firstAttribute="leading" secondItem="aj2-JW-qNj" secondAttribute="leading" id="LCu-nG-JDt"/>
+                            <constraint firstItem="ji7-66-gP6" firstAttribute="centerX" secondItem="aj2-JW-qNj" secondAttribute="centerX" id="Q1l-Dj-zJv"/>
+                            <constraint firstItem="JmS-Hw-sh8" firstAttribute="top" secondItem="v1e-qo-SXO" secondAttribute="top" constant="50" id="Vx5-ja-drt"/>
+                            <constraint firstItem="v1e-qo-SXO" firstAttribute="top" secondItem="aj2-JW-qNj" secondAttribute="top" id="cKL-SZ-ZY7"/>
+                            <constraint firstItem="OLp-Yf-0Wa" firstAttribute="top" secondItem="ji7-66-gP6" secondAttribute="bottom" constant="25" id="dto-zo-EGs"/>
+                            <constraint firstItem="UNz-kV-yTb" firstAttribute="top" secondItem="JmS-Hw-sh8" secondAttribute="bottom" constant="8" symbolic="YES" id="gUd-Es-I6l"/>
+                            <constraint firstItem="UNz-kV-yTb" firstAttribute="leading" secondItem="aj2-JW-qNj" secondAttribute="leading" constant="20" symbolic="YES" id="gcL-Rt-wT7"/>
+                            <constraint firstAttribute="trailing" secondItem="JmS-Hw-sh8" secondAttribute="trailing" constant="20" symbolic="YES" id="heb-lg-IdB"/>
+                            <constraint firstItem="JmS-Hw-sh8" firstAttribute="leading" secondItem="aj2-JW-qNj" secondAttribute="leading" constant="20" symbolic="YES" id="kdb-OF-wPk"/>
+                            <constraint firstItem="OLp-Yf-0Wa" firstAttribute="centerX" secondItem="aj2-JW-qNj" secondAttribute="centerX" id="wwM-cL-FaL"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="button" destination="ji7-66-gP6" id="dBd-xN-9l8"/>
+                        <outlet property="instructions" destination="OLp-Yf-0Wa" id="v5b-Ca-nQS"/>
+                    </connections>
+                </viewController>
+                <customObject id="Mqm-s4-rUG" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="79" y="352.5"/>
         </scene>
     </scenes>
 </document>

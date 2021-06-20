@@ -12,6 +12,7 @@
 		856112E4264ACD0800FC95AD /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 856112E3264ACD0800FC95AD /* Preview Assets.xcassets */; };
 		856112E7264ACD0800FC95AD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 856112E5264ACD0800FC95AD /* Main.storyboard */; };
 		856112F0264ADC8B00FC95AD /* CGEventExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 856112EF264ADC8B00FC95AD /* CGEventExtension.swift */; };
+		85B2C5A6267E983F0004C448 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B2C5A5267E983F0004C448 /* WelcomeViewController.swift */; };
 		85C8AB46267E22EC00B67E09 /* EventHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C8AB45267E22EC00B67E09 /* EventHandler.swift */; };
 		85C8AB49267E27BE00B67E09 /* MenuBuilder in Frameworks */ = {isa = PBXBuildFile; productRef = 85C8AB48267E27BE00B67E09 /* MenuBuilder */; };
 		85C8AB4C267E28FF00B67E09 /* LaunchAtLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 85C8AB4B267E28FF00B67E09 /* LaunchAtLogin */; };
@@ -27,6 +28,7 @@
 		856112E9264ACD0800FC95AD /* ForceClickToRightClick.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ForceClickToRightClick.entitlements; sourceTree = "<group>"; };
 		856112EF264ADC8B00FC95AD /* CGEventExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGEventExtension.swift; sourceTree = "<group>"; };
 		8565A45A264F059100E98569 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		85B2C5A5267E983F0004C448 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		85C8AB45267E22EC00B67E09 /* EventHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventHandler.swift; sourceTree = "<group>"; };
 		85C8AB4F267E769F00B67E09 /* contact.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = contact.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -70,6 +72,7 @@
 				856112EF264ADC8B00FC95AD /* CGEventExtension.swift */,
 				856112E0264ACD0800FC95AD /* Assets.xcassets */,
 				856112E5264ACD0800FC95AD /* Main.storyboard */,
+				85B2C5A5267E983F0004C448 /* WelcomeViewController.swift */,
 				856112E8264ACD0800FC95AD /* Info.plist */,
 				856112E9264ACD0800FC95AD /* ForceClickToRightClick.entitlements */,
 				856112E2264ACD0800FC95AD /* Preview Content */,
@@ -185,6 +188,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				856112F0264ADC8B00FC95AD /* CGEventExtension.swift in Sources */,
+				85B2C5A6267E983F0004C448 /* WelcomeViewController.swift in Sources */,
 				85C8AB46267E22EC00B67E09 /* EventHandler.swift in Sources */,
 				856112DD264ACD0600FC95AD /* AppDelegate.swift in Sources */,
 			);

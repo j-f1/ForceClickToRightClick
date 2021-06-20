@@ -13,11 +13,23 @@ import LaunchAtLogin
 class AppDelegate: NSObject, NSApplicationDelegate {
   var state = Wrapper()
 
-  let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
+  lazy var statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
 
   func applicationDidFinishLaunching(_: Notification) {
-    createEventTap()
-    initStatusItem()
+    if AXIsProcessTrusted() {
+      createEventTap()
+      initStatusItem()
+    } else {
+      if let controller = NSStoryboard.main?.instantiateController(withIdentifier: "WelcomeWindow") as? NSWindowController {
+        controller.showWindow(self)
+        if let vc = controller.contentViewController as? WelcomeViewController {
+          vc.onComplete = { [weak self] in
+            self?.createEventTap()
+            self?.initStatusItem()
+          }
+        }
+      }
+    }
   }
 
   func initStatusItem() {
@@ -41,6 +53,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       .onSelect {
         LaunchAtLogin.isEnabled.toggle()
         self.statusItem.menu?.replaceItems(with: self.buildMenu)
+      }
+    MenuItem("Accessibility Preferences…")
+      .onSelect {
+        NSWorkspace.shared.open(URL(string: "x-apple.systempreferences:com.apple.preference.security?Privacy_Accessibility")!)
       }
     SeparatorItem()
     MenuItem("Quit \(appName)")
