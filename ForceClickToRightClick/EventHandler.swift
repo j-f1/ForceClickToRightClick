@@ -57,6 +57,7 @@ extension CGEvent {
 
 func handle(event: NSEvent, cgEvent: CGEvent, wrapper: Wrapper, proxy: CGEventTapProxy) -> CGEvent? {
   if event.type == .leftMouseDown {
+//    print("mouse down")
     let state = Wrapper.State(mouseDownEvent: cgEvent)
     state.task = DispatchWorkItem {
       state.replay(into: proxy, from: cgEvent, isRight: false)
@@ -82,6 +83,7 @@ func handle(event: NSEvent, cgEvent: CGEvent, wrapper: Wrapper, proxy: CGEventTa
       } else if distanceSq >= pow(8, 2) {
 //        print("replaying: out of bounds")
         state.replay(into: proxy, from: cgEvent, isRight: false)
+        wrapper.state = nil
         return cgEvent
       } else {
 //        print("move: in bounds")
