@@ -32,6 +32,7 @@
 		85B2C5A7267FE9810004C448 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		85C8AB45267E22EC00B67E09 /* EventHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventHandler.swift; sourceTree = "<group>"; };
 		85C8AB4F267E769F00B67E09 /* contact.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = contact.md; sourceTree = "<group>"; };
+		85F42CA4267FF48700C3F246 /* privacy.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = privacy.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,6 +51,7 @@
 		856112D0264ACD0500FC95AD = {
 			isa = PBXGroup;
 			children = (
+				85F42CA4267FF48700C3F246 /* privacy.md */,
 				85C8AB4F267E769F00B67E09 /* contact.md */,
 				8565A45A264F059100E98569 /* README.md */,
 				85B2C5A7267FE9810004C448 /* LICENSE */,
