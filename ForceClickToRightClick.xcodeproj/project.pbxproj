@@ -29,6 +29,7 @@
 		856112EF264ADC8B00FC95AD /* CGEventExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGEventExtension.swift; sourceTree = "<group>"; };
 		8565A45A264F059100E98569 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		85B2C5A5267E983F0004C448 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
+		85B2C5A7267FE9810004C448 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		85C8AB45267E22EC00B67E09 /* EventHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventHandler.swift; sourceTree = "<group>"; };
 		85C8AB4F267E769F00B67E09 /* contact.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = contact.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -51,6 +52,7 @@
 			children = (
 				85C8AB4F267E769F00B67E09 /* contact.md */,
 				8565A45A264F059100E98569 /* README.md */,
+				85B2C5A7267FE9810004C448 /* LICENSE */,
 				856112DB264ACD0600FC95AD /* ForceClickToRightClick */,
 				856112DA264ACD0600FC95AD /* Products */,
 			);
