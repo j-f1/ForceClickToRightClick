@@ -58,6 +58,7 @@
 				856112DB264ACD0600FC95AD /* ForceClickToRightClick */,
 				856112DA264ACD0600FC95AD /* Products */,
 			);
+			indentWidth = 2;
 			sourceTree = "<group>";
 		};
 		856112DA264ACD0600FC95AD /* Products */ = {

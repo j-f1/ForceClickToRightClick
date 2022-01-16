@@ -69,6 +69,7 @@ class WelcomeViewController: NSViewController, NSWindowDelegate {
     } else {
       button.title = "Request Access"
       instructionsLabel.stringValue = """
+      1. Click “Request Access” above
       1. Click the “Open System Preferences” button in the dialog that appears
       2. Click the lock at the bottom left to unlock the settings if necessary
       3. Scroll the list on the right until you see “ForceClickToRightClick”

@@ -15,9 +15,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   lazy var statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
 
+  var eventTap: CFMachPort?
+
   func applicationDidFinishLaunching(_: Notification) {
     if AXIsProcessTrusted() {
       createEventTap()
+      enableEventTap()
       initStatusItem()
     } else {
       if let controller = NSStoryboard.main?.instantiateController(withIdentifier: "WelcomeWindow") as? NSWindowController {
@@ -25,6 +28,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if let vc = controller.contentViewController as? WelcomeViewController {
           vc.onComplete = { [weak self] in
             self?.createEventTap()
+            self?.enableEventTap()
             self?.initStatusItem()
           }
         }
@@ -65,13 +69,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }
 
   func createEventTap() {
-    let eventTap = CGEvent.tapCreate(
+    eventTap = CGEvent.tapCreate(
       tap: .cgSessionEventTap,
       place: .headInsertEventTap,
       options: .defaultTap,
       eventsOfInterest: [.leftMouseDown, .leftMouseUp, .pressure, .leftMouseDragged],
       callback: { proxy, _, cgEvent, ctx in
-//        print(cgEvent)
+        if cgEvent.type == .tapDisabledByTimeout || cgEvent.type == .tapDisabledByUserInput {
+          (NSApp.delegate as? AppDelegate)?.enableEventTap()
+          return .passUnretained(cgEvent)
+        }
         if let event = NSEvent(cgEvent: cgEvent),
            let wrapper = ctx?.load(as: Wrapper.self) {
           if let newEvent = handle(event: event, cgEvent: cgEvent, wrapper: wrapper, proxy: proxy) {
@@ -95,6 +102,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
           return .passUnretained(cgEvent)
         }
       }, userInfo: &state)
+  }
+  func enableEventTap() {
     if let eventTap = eventTap {
       RunLoop.current.add(eventTap, forMode: .common)
       CGEvent.tapEnable(tap: eventTap, enable: true)
