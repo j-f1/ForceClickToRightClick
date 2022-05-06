@@ -19,7 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		856112D9264ACD0600FC95AD /* ForceClickToRightClick.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ForceClickToRightClick.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		856112D9264ACD0600FC95AD /* DEBUG ForceClickToRightClick.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "DEBUG ForceClickToRightClick.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		856112DC264ACD0600FC95AD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		856112E0264ACD0800FC95AD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		856112E3264ACD0800FC95AD /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -64,7 +64,7 @@
 		856112DA264ACD0600FC95AD /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				856112D9264ACD0600FC95AD /* ForceClickToRightClick.app */,
+				856112D9264ACD0600FC95AD /* DEBUG ForceClickToRightClick.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -115,7 +115,7 @@
 				85C8AB4B267E28FF00B67E09 /* LaunchAtLogin */,
 			);
 			productName = ForceClickToRightClick;
-			productReference = 856112D9264ACD0600FC95AD /* ForceClickToRightClick.app */;
+			productReference = 856112D9264ACD0600FC95AD /* DEBUG ForceClickToRightClick.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -125,7 +125,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1250;
-				LastUpgradeCheck = 1250;
+				LastUpgradeCheck = 1330;
 				TargetAttributes = {
 					856112D8264ACD0600FC95AD = {
 						CreatedOnToolsVersion = 12.5;
@@ -348,8 +348,8 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.jedfox.ForceClickToRightClick;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.jedfox.ForceClickToRightClick-Debug";
+				PRODUCT_NAME = "DEBUG $(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
