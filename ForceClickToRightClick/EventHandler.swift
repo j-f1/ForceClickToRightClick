@@ -80,7 +80,7 @@ func handle(event: NSEvent, cgEvent: CGEvent, wrapper: Wrapper, proxy: CGEventTa
       let distanceSq = pow(cgEvent.location.x - state.mouseDownEvent.location.x, 2) + pow(cgEvent.location.y - state.mouseDownEvent.location.y, 2)
       if state.isRight {
         return cgEvent.switchToRight()!
-      } else if distanceSq >= pow(8, 2) {
+      } else if distanceSq >= 1 {
 //        print("replaying: out of bounds")
         state.replay(into: proxy, from: cgEvent, isRight: false)
         wrapper.state = nil
@@ -95,6 +95,8 @@ func handle(event: NSEvent, cgEvent: CGEvent, wrapper: Wrapper, proxy: CGEventTa
     } else if event.type == .pressure {
       if event.stage == 2 && !state.isRight {
 //        print("right down!")
+//        let distance = sqrt(pow(cgEvent.location.x - state.mouseDownEvent.location.x, 2) + pow(cgEvent.location.y - state.mouseDownEvent.location.y, 2))
+//        print("right with distance \(distance): \(state.mouseDownEvent.location) -> \(cgEvent.location)")
         state.isRight = true
         state.task.cancel()
         state.replay(into: proxy, from: cgEvent, isRight: true)
